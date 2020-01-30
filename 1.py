@@ -3,40 +3,43 @@ import random
 
 #建立随机单词库
 dictionary=("cat","dog","rabbit","bear","sheep")
-def hangman(word): #定义函数
-    wrong = 0#错误的次数
+def hangman(word): #関数を定義
+    wrong = 0#エラー数
     HP = ["",
               "_______      ",
-              "|            ",
+              "|      |     ",
+              "|      |     ",
+              "|      |     ",
               "|      |     ",
               "|      0     ",
               "|     /|\    ",
               "|     / \    ",
               "|            "
               ]
-    rletters = list(word)#释放列表WORD
-    board = ["_"] * len(word)#根据随机到的单词长度展现下划线，
-    win = False#默认是失败
-    print("欢迎来到猜单词(动物)!")
-    while wrong < len(HP) - 1:#如果wrong的次数小于生命值就会继续运行
+    data = list(word)#リリースリストWORD
+    board = ["_"] * len(word)#ランダムな語長に基づく下線，
+    win = False#デフォルトは失敗です
+    print("単語当てゲームへようこそ!(動物)")
+    while wrong < len(HP) - 1:#回数がヘルス値より小さい場合、実行を継続します
         print("\n")
-        msg = "请输入字母! "
-        char = input(msg)#请输入字母
-        if char in rletters:#判断机制，如果字母正确
-            cind = rletters.index(char)#判断单词位置
-            board[cind] = char#替换字母
-        else:#错误计数器 如果错误计数器就加1
+        msg = "アルファベットを入力してください! "
+        char = input(msg)#アルファベットを入力してください!
+        if char in data:#判断のメカニズムは、アルファベットが正しければ
+            cind = data.index(char)#アルファベットの位置を判断する
+            board[cind] = char#アルファベットを置き換える
+            data[cind] = '0'#データベースの判定順序を更新する
+        else:#エラーカウンタはエラーカウンタが1加算される
             wrong += 1
-        print(" ".join(board))#不管正确还是错误都打印单词板
+        print(" ".join(board))#正しくても間違っても単語板を印刷する
         e = wrong + 1
-        print("\n".join(HP[0:e]))#记录小人的失败位置
-        if "_" not in board:#如果单词全部输对就就获胜，并且打印单词
-            print("胜利!")
+        print("\n".join(HP[0:e]))#小人の失敗位置を記録する
+        if "_" not in board:#如結果単語が全て負ければ勝ちとなり、単語が印刷される
+            print("勝利!")
             print(" ".join(board))
             win = True
             break
     if not win:
-        print("\n".join(HP[0:wrong+1]))#如果血量不足则失败
-        print("您失败了,正确答案是{}".format(word))
-sblsy = random.choice(dictionary)#随机抽取单词
+        print("\n".join(HP[0:wrong+1]))#HPが足りなければ失敗する
+        print("あなたは失敗しました。正解は{}".format(word))
+sblsy = random.choice(dictionary)#単語を無作為に抽出する
 hangman(sblsy)

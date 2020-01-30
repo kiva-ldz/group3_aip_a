@@ -1,0 +1,8 @@
+#introuce random
+import random
+def putin():
+     print("请输入你想输入的单词!")
+     w=input("input:")
+     return w
+
+sblsy=putin()
